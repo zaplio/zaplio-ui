@@ -22,11 +22,15 @@ export default function AuthLayout({
                   width={231}
                   height={48}
                   src="/images/logo/auth-logo.svg"
-                  alt="Logo"
+                  alt="Zaplio"
                 />
               </Link>
+              <h2 className="mb-2 text-2xl font-bold text-center text-white">
+                Zaplio
+              </h2>
               <p className="text-center text-gray-400 dark:text-white/60">
-                Free and Open-Source Tailwind CSS Admin Dashboard Template
+                Platform manajemen WhatsApp Anda — kirim pesan, kelola kontak &
+                grup dalam satu tempat.
               </p>
             </div>
           </div>
