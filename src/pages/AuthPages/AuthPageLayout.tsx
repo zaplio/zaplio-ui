@@ -25,9 +25,6 @@ export default function AuthLayout({
                   alt="Zaplio"
                 />
               </Link>
-              <h2 className="mb-2 text-2xl font-bold text-center text-white">
-                Zaplio
-              </h2>
               <p className="text-center text-gray-400 dark:text-white/60">
                 Platform manajemen WhatsApp Anda — kirim pesan, kelola kontak &
                 grup dalam satu tempat.
