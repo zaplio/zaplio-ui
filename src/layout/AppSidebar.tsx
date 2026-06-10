@@ -123,7 +123,7 @@ const AppSidebar: React.FC = () => {
   };
 
   const renderMenuItems = (items: NavItem[], groupIndex: number) => (
-    <ul className="flex flex-col gap-4">
+    <ul className="flex flex-col gap-0.5">
       {items.map((nav, index) => {
         const isOpen =
           openSubmenu?.group === groupIndex && openSubmenu?.index === index;
@@ -194,7 +194,7 @@ const AppSidebar: React.FC = () => {
                   height: isOpen ? `${subMenuHeight[key]}px` : "0px",
                 }}
               >
-                <ul className="mt-2 space-y-1 ml-9">
+                <ul className="mt-1 space-y-0.5 ml-7">
                   {nav.subItems.map((subItem) => (
                     <li key={subItem.name}>
                       <Link
@@ -220,20 +220,20 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-5 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
+      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-3 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
         ${
           isExpanded || isMobileOpen
-            ? "w-[290px]"
+            ? "w-[240px]"
             : isHovered
-            ? "w-[290px]"
-            : "w-[90px]"
+            ? "w-[240px]"
+            : "w-[72px]"
         }
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0`}
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="py-8 flex justify-center">
+      <div className="py-5 flex justify-center">
         <Link to="/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
@@ -241,34 +241,34 @@ const AppSidebar: React.FC = () => {
                 className="dark:hidden"
                 src="/images/logo/logo.svg"
                 alt="Zaplio"
-                width={150}
-                height={40}
+                width={120}
+                height={32}
               />
               <img
                 className="hidden dark:block"
                 src="/images/logo/logo-dark.svg"
                 alt="Zaplio"
-                width={150}
-                height={40}
+                width={120}
+                height={32}
               />
             </>
           ) : (
             <img
               src="/images/logo/logo-icon.svg"
               alt="Zaplio"
-              width={32}
-              height={32}
+              width={28}
+              height={28}
             />
           )}
         </Link>
       </div>
       <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
-        <nav className="mb-6">
-          <div className="flex flex-col gap-4">
+        <nav className="mb-4">
+          <div className="flex flex-col gap-2">
             {menuGroups.map((group, groupIndex) => (
               <div key={group.label}>
                 <h2
-                  className={`mb-4 text-xs uppercase flex leading-[20px] text-gray-400 ${
+                  className={`mb-2 text-[11px] uppercase tracking-wider flex leading-[18px] text-gray-400 ${
                     !isExpanded && !isHovered
                       ? "lg:justify-center"
                       : "justify-start"
@@ -277,7 +277,7 @@ const AppSidebar: React.FC = () => {
                   {isExpanded || isHovered || isMobileOpen ? (
                     group.label
                   ) : (
-                    <HorizontaLDots className="size-6" />
+                    <HorizontaLDots className="size-5" />
                   )}
                 </h2>
                 {renderMenuItems(group.items, groupIndex)}
