@@ -62,6 +62,7 @@ Semua halaman demo TailAdmin (Calendar, UserProfiles, Blank, Forms/FormElements,
 Layer integrasi & fitur WhatsApp sudah tersambung ke backend:
 - **Config**: `.env` (`VITE_AUTH_API_URL`, `VITE_WHATSAPP_API_URL`, `VITE_QRSTREAMER_WS_URL`) dibaca di `src/services/config.ts` (ada fallback localhost).
 - **Services** (`src/services/`): `types.ts` (tipe API), `auth.ts` (login/register/getProfile/logout + parse envelope authcenterapi), `whatsapp.ts` (sendMessage/getContacts/getGroups — whatsapp-api tanpa envelope).
+- **`http.ts`** (`authFetch`): wrapper `fetch` yang otomatis menyisipkan header `Authorization: Bearer <access_token>` (token dibaca dari localStorage `zaplio.auth`). SEMUA service privat (account/contact/tag/segment/whatsapp) hit API lewat `authFetch`. Endpoint **publik** (login/register di `auth.ts`) tetap pakai `fetch` biasa; getProfile/logout sudah kirim token eksplisit.
 - **Auth state**: `src/context/AuthContext.tsx` (`useAuth`) — login/register/logout, simpan session ke `localStorage` key `zaplio.auth` (lewat `TOKEN_STORAGE_KEY`). Provider dipasang di `main.tsx` (membungkus AppWrapper).
 - **Route guard**: `src/components/auth/ProtectedRoute.tsx` — semua route dashboard dibungkus `<ProtectedRoute>` di `App.tsx`; redirect ke `/signin` bila belum login.
 - **Auth UI**: `SignInForm` (pakai field **username**+password → `useAuth().login`), `SignUpForm` (username/email/phone/password → `register`). `UserDropdown` menampilkan user nyata + tombol Sign out (panggil `logout`).

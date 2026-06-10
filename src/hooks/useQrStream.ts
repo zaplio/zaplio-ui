@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { QRSTREAMER_WS_URL } from "../services/config";
+import { getAccessToken } from "../services/http";
 import type { WSMessage } from "../services/types";
 
 export type QrStatus =
@@ -51,9 +52,14 @@ export function useQrStream() {
       }
       setState({ ...initialState, status: "connecting" });
 
-      const url = `${QRSTREAMER_WS_URL}?wa_id=${encodeURIComponent(
-        waId
-      )}&user_id=${encodeURIComponent(userId)}`;
+      // Browser tidak bisa set header Authorization pada handshake WebSocket,
+      // jadi token dikirim lewat query `?token=`. Envoy (lua filter) yang mengubahnya
+      // jadi header `Authorization: Bearer` sebelum divalidasi ke authcenterapi.
+      const token = getAccessToken();
+      const url =
+        `${QRSTREAMER_WS_URL}?account_id=${encodeURIComponent(waId)}` +
+        `&user_id=${encodeURIComponent(userId)}` +
+        (token ? `&token=${encodeURIComponent(token)}` : "");
       const ws = new WebSocket(url);
       wsRef.current = ws;
 

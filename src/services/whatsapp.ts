@@ -1,4 +1,5 @@
 import { WHATSAPP_API_URL } from "./config";
+import { authFetch } from "./http";
 import type {
   ContactsResponse,
   GroupsResponse,
@@ -23,7 +24,7 @@ async function handle<T>(res: Response): Promise<T> {
 export async function sendMessage(
   payload: SendMessagePayload
 ): Promise<SendMessageResponse> {
-  const res = await fetch(`${WHATSAPP_API_URL}/api/v1/messages`, {
+  const res = await authFetch(`${WHATSAPP_API_URL}/api/v1/messages`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -34,14 +35,17 @@ export async function sendMessage(
 export async function getContacts(
   accountId: string
 ): Promise<ContactsResponse> {
-  const res = await fetch(
-    `${WHATSAPP_API_URL}/api/v1/contacts/${encodeURIComponent(accountId)}`
+  // Lewat /api/v1/wa/contacts agar Envoy route ke whatsapp-api
+  // (prefix /api/v1/contacts tanpa /wa milik core-manager-api).
+  // Envoy prefix_rewrite mengubahnya balik jadi /api/v1/contacts/:id untuk whatsapp-api.
+  const res = await authFetch(
+    `${WHATSAPP_API_URL}/api/v1/wa/contacts/${encodeURIComponent(accountId)}`
   );
   return handle<ContactsResponse>(res);
 }
 
 export async function getGroups(accountId: string): Promise<GroupsResponse> {
-  const res = await fetch(
+  const res = await authFetch(
     `${WHATSAPP_API_URL}/api/v1/groups/${encodeURIComponent(accountId)}`
   );
   return handle<GroupsResponse>(res);

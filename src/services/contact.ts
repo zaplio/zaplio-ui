@@ -1,4 +1,5 @@
 import { CORE_API_URL } from "./config";
+import { authFetch } from "./http";
 import type {
   ApiEnvelope,
   CoreContact,
@@ -27,14 +28,14 @@ export async function listContacts(accountId?: string): Promise<CoreContact[]> {
   if (accountId) {
     url.searchParams.set("account_id", accountId);
   }
-  const res = await fetch(url.toString());
+  const res = await authFetch(url.toString());
   return parseEnvelope<CoreContact[]>(res);
 }
 
 export async function createContact(
   payload: CreateCoreContactPayload
 ): Promise<CoreContact> {
-  const res = await fetch(`${CORE_API_URL}/api/v1/contacts`, {
+  const res = await authFetch(`${CORE_API_URL}/api/v1/contacts`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -43,7 +44,7 @@ export async function createContact(
 }
 
 export async function deleteContact(id: string): Promise<void> {
-  const res = await fetch(
+  const res = await authFetch(
     `${CORE_API_URL}/api/v1/contacts/${encodeURIComponent(id)}`,
     { method: "DELETE" }
   );

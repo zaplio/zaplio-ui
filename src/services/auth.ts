@@ -57,3 +57,20 @@ export async function logoutRequest(token: string): Promise<void> {
     headers: { Authorization: `Bearer ${token}` },
   }).catch(() => undefined);
 }
+
+export interface RefreshResponse {
+  access_token: string;
+  refresh_token?: string;
+  expires_at?: string;
+}
+
+export async function refreshTokenApi(
+  refreshToken: string
+): Promise<RefreshResponse> {
+  const res = await fetch(`${AUTH_API_URL}/api/v1/auth/refresh`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ refresh_token: refreshToken }),
+  });
+  return parseEnvelope<RefreshResponse>(res);
+}

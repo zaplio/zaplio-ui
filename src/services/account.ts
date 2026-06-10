@@ -1,4 +1,5 @@
 import { CORE_API_URL } from "./config";
+import { authFetch } from "./http";
 import type { ApiEnvelope, CreateAccountPayload, WaAccount } from "./types";
 
 async function parseEnvelope<T>(res: Response): Promise<T> {
@@ -22,14 +23,14 @@ export async function listAccounts(userId?: string): Promise<WaAccount[]> {
   if (userId) {
     url.searchParams.set("user_id", encodeURIComponent(userId));
   }
-  const res = await fetch(url.toString());
+  const res = await authFetch(url.toString());
   return parseEnvelope<WaAccount[]>(res);
 }
 
 export async function createAccount(
   payload: CreateAccountPayload
 ): Promise<WaAccount> {
-  const res = await fetch(`${CORE_API_URL}/api/v1/accounts`, {
+  const res = await authFetch(`${CORE_API_URL}/api/v1/accounts`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -38,7 +39,7 @@ export async function createAccount(
 }
 
 export async function deleteAccount(id: string): Promise<void> {
-  const res = await fetch(
+  const res = await authFetch(
     `${CORE_API_URL}/api/v1/accounts/${encodeURIComponent(id)}`,
     { method: "DELETE" }
   );

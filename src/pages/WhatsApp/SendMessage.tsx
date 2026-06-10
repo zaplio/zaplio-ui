@@ -6,13 +6,11 @@ import ComponentCard from "../../components/common/ComponentCard";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
 import TextArea from "../../components/form/input/TextArea";
+import AccountSelect from "../../components/form/AccountSelect";
 import { sendMessage } from "../../services/whatsapp";
 import { listAccounts } from "../../services/account";
 import { useAuth } from "../../context/AuthContext";
 import type { WaAccount } from "../../services/types";
-
-const selectClass =
-  "h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90";
 
 export default function SendMessage() {
   const { user } = useAuth();
@@ -83,23 +81,12 @@ export default function SendMessage() {
 
             <div>
               <Label>WhatsApp Account</Label>
-              <select
+              <AccountSelect
+                accounts={accounts}
                 value={accountId}
-                onChange={(e) => setAccountId(e.target.value)}
-                className={selectClass}
-              >
-                <option value="" disabled>
-                  {accounts.length === 0
-                    ? "Belum ada account — buat dulu di Kelola Account"
-                    : "Pilih account"}
-                </option>
-                {accounts.map((a) => (
-                  <option key={a.account_id} value={a.account_id}>
-                    {a.account_name}
-                    {a.account_alias ? ` (${a.account_alias})` : ""}
-                  </option>
-                ))}
-              </select>
+                onChange={setAccountId}
+                placeholder="Pilih account"
+              />
             </div>
             <div>
               <Label>Tujuan (nomor / JID)</Label>

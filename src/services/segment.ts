@@ -1,4 +1,5 @@
 import { CORE_API_URL } from "./config";
+import { authFetch } from "./http";
 import type {
   ApiEnvelope,
   CreateSegmentPayload,
@@ -28,14 +29,14 @@ export async function listSegments(userId?: string): Promise<Segment[]> {
   if (userId) {
     url.searchParams.set("user_id", userId);
   }
-  const res = await fetch(url.toString());
+  const res = await authFetch(url.toString());
   return parseEnvelope<Segment[]>(res);
 }
 
 export async function createSegment(
   payload: CreateSegmentPayload
 ): Promise<Segment> {
-  const res = await fetch(`${CORE_API_URL}/api/v1/segments`, {
+  const res = await authFetch(`${CORE_API_URL}/api/v1/segments`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -47,7 +48,7 @@ export async function updateSegment(
   id: string,
   patch: UpdateSegmentPayload
 ): Promise<Segment> {
-  const res = await fetch(
+  const res = await authFetch(
     `${CORE_API_URL}/api/v1/segments/${encodeURIComponent(id)}`,
     {
       method: "PUT",
@@ -59,7 +60,7 @@ export async function updateSegment(
 }
 
 export async function deleteSegment(id: string): Promise<void> {
-  const res = await fetch(
+  const res = await authFetch(
     `${CORE_API_URL}/api/v1/segments/${encodeURIComponent(id)}`,
     { method: "DELETE" }
   );
@@ -70,7 +71,7 @@ export async function previewSegment(payload: {
   user_id: string;
   conditions: SegmentConditions;
 }): Promise<{ count: number }> {
-  const res = await fetch(`${CORE_API_URL}/api/v1/segments/preview`, {
+  const res = await authFetch(`${CORE_API_URL}/api/v1/segments/preview`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

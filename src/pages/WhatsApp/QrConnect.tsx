@@ -6,6 +6,7 @@ import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import ComponentCard from "../../components/common/ComponentCard";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
+import AccountSelect from "../../components/form/AccountSelect";
 import { useAuth } from "../../context/AuthContext";
 import { useQrStream } from "../../hooks/useQrStream";
 import { listAccounts } from "../../services/account";
@@ -20,9 +21,6 @@ const statusLabel: Record<string, { text: string; cls: string }> = {
   error: { text: "Error", cls: "bg-error-50 text-error-700 dark:bg-error-500/10 dark:text-error-400" },
   closed: { text: "Koneksi ditutup", cls: "bg-gray-100 text-gray-600 dark:bg-white/5 dark:text-gray-400" },
 };
-
-const selectClass =
-  "h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 disabled:opacity-50 disabled:cursor-not-allowed dark:border-gray-700 dark:bg-gray-900 dark:text-white/90";
 
 export default function QrConnect() {
   const { user } = useAuth();
@@ -64,24 +62,13 @@ export default function QrConnect() {
           <div className="space-y-5">
             <div>
               <Label>WhatsApp Account</Label>
-              <select
+              <AccountSelect
+                accounts={accounts}
                 value={accountId}
-                onChange={(e) => setAccountId(e.target.value)}
+                onChange={setAccountId}
                 disabled={isStreaming}
-                className={selectClass}
-              >
-                <option value="" disabled>
-                  {accounts.length === 0
-                    ? "Belum ada account — buat dulu di Kelola Account"
-                    : "Pilih account"}
-                </option>
-                {accounts.map((a) => (
-                  <option key={a.account_id} value={a.account_id}>
-                    {a.account_name}
-                    {a.account_alias ? ` (${a.account_alias})` : ""}
-                  </option>
-                ))}
-              </select>
+                placeholder="Pilih account"
+              />
             </div>
             <div>
               <Label>User ID</Label>

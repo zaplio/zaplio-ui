@@ -4,6 +4,7 @@ import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 import ComponentCard from "../../components/common/ComponentCard";
 import Label from "../../components/form/Label";
 import Input from "../../components/form/input/InputField";
+import AccountSelect from "../../components/form/AccountSelect";
 import {
   Table,
   TableBody,
@@ -245,24 +246,13 @@ export default function MyContacts() {
             <Label>
               Account WhatsApp <span className="text-error-500">*</span>
             </Label>
-            <select
+            <AccountSelect
+              accounts={accounts}
               value={accountId}
-              onChange={(e) => setAccountId(e.target.value)}
+              onChange={setAccountId}
               disabled={submitting}
-              className="h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90"
-            >
-              <option value="" disabled>
-                {accounts.length === 0
-                  ? "Belum ada account — buat dulu di Kelola Account"
-                  : "Pilih account"}
-              </option>
-              {accounts.map((a) => (
-                <option key={a.account_id} value={a.account_id}>
-                  {a.account_name}
-                  {a.account_alias ? ` (${a.account_alias})` : ""}
-                </option>
-              ))}
-            </select>
+              placeholder="Pilih account"
+            />
           </div>
           <div>
             <Label>

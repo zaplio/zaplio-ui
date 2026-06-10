@@ -1,4 +1,5 @@
 import { CORE_API_URL } from "./config";
+import { authFetch } from "./http";
 import type {
   ApiEnvelope,
   CreateTagPayload,
@@ -27,12 +28,12 @@ export async function listTags(userId?: string): Promise<Tag[]> {
   if (userId) {
     url.searchParams.set("user_id", userId);
   }
-  const res = await fetch(url.toString());
+  const res = await authFetch(url.toString());
   return parseEnvelope<Tag[]>(res);
 }
 
 export async function createTag(payload: CreateTagPayload): Promise<Tag> {
-  const res = await fetch(`${CORE_API_URL}/api/v1/tags`, {
+  const res = await authFetch(`${CORE_API_URL}/api/v1/tags`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -44,7 +45,7 @@ export async function updateTag(
   id: string,
   patch: UpdateTagPayload
 ): Promise<Tag> {
-  const res = await fetch(
+  const res = await authFetch(
     `${CORE_API_URL}/api/v1/tags/${encodeURIComponent(id)}`,
     {
       method: "PUT",
@@ -56,7 +57,7 @@ export async function updateTag(
 }
 
 export async function deleteTag(id: string): Promise<void> {
-  const res = await fetch(
+  const res = await authFetch(
     `${CORE_API_URL}/api/v1/tags/${encodeURIComponent(id)}`,
     { method: "DELETE" }
   );

@@ -52,6 +52,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     setSession(loadSession());
     setIsLoading(false);
+
+    // Listen untuk refresh token dari authFetch (http.ts).
+    const onRefresh = () => {
+      setSession(loadSession());
+    };
+    window.addEventListener("auth:token-refreshed", onRefresh);
+    return () => window.removeEventListener("auth:token-refreshed", onRefresh);
   }, []);
 
   const persist = useCallback((s: AuthSession | null) => {
