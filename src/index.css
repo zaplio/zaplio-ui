@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap")
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap")
 layer(base);
 
 @import "tailwindcss";
@@ -7,7 +7,7 @@ layer(base);
 
 @theme {
   --font-*: initial;
-  --font-outfit: Outfit, sans-serif;
+  --font-inter: Inter, system-ui, sans-serif;
 
   --breakpoint-*: initial;
   --breakpoint-2xsm: 375px;
@@ -186,20 +186,60 @@ layer(base);
     cursor: pointer;
   }
   body {
-    @apply relative font-normal font-outfit z-1 bg-gray-50;
+    @apply relative font-normal font-inter z-1 bg-gray-50;
+  }
+
+  :root {
+    --surface: #ffffff;
+    --surface-secondary: #f9fafb;
+    --surface-hover: #f2f4f7;
+    --surface-active: #e4e7ec;
+
+    --text-primary: #101828;
+    --text-secondary: #475467;
+    --text-muted: #98a2b3;
+
+    --border: #e4e7ec;
+    --border-subtle: #f2f4f7;
+
+    --primary: #465fff;
+    --primary-hover: #3641f5;
+    --success: #12b76a;
+    --warning: #f79009;
+    --danger: #f04438;
+  }
+
+  .dark {
+    --surface: #101828;
+    --surface-secondary: #1d2939;
+    --surface-hover: #344054;
+    --surface-active: #475467;
+
+    --text-primary: #fcfcfd;
+    --text-secondary: #d0d5dd;
+    --text-muted: #667085;
+
+    --border: #344054;
+    --border-subtle: #1d2939;
+
+    --primary: #465fff;
+    --primary-hover: #7592ff;
+    --success: #12b76a;
+    --warning: #f79009;
+    --danger: #f04438;
   }
 }
 
 @utility menu-item {
-  @apply relative flex items-center w-full gap-2.5 px-2.5 py-1.5 font-medium rounded-md text-[13px];
+  @apply relative flex items-center w-full gap-3 px-3 py-2.5 font-medium rounded-xl text-[14px] min-h-[44px];
 }
 
 @utility menu-item-active {
-  @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+  @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.1] dark:text-brand-400;
 }
 
 @utility menu-item-inactive {
-  @apply text-gray-700 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+  @apply text-gray-600 hover:bg-gray-100 group-hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/[0.06] dark:hover:text-gray-300;
 }
 
 @utility menu-item-icon {
@@ -233,15 +273,15 @@ layer(base);
 }
 
 @utility menu-dropdown-item {
-  @apply relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium;
+  @apply relative flex items-center gap-3 rounded-xl px-3 py-2 text-[14px] font-medium;
 }
 
 @utility menu-dropdown-item-active {
-  @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.12] dark:text-brand-400;
+  @apply bg-brand-50 text-brand-500 dark:bg-brand-500/[0.1] dark:text-brand-400;
 }
 
 @utility menu-dropdown-item-inactive {
-  @apply text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5;
+  @apply text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-white/[0.06];
 }
 
 @utility menu-dropdown-badge {

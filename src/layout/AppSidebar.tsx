@@ -194,7 +194,7 @@ const AppSidebar: React.FC = () => {
                   height: isOpen ? `${subMenuHeight[key]}px` : "0px",
                 }}
               >
-                <ul className="mt-1 space-y-0.5 ml-7">
+                <ul className="mt-1 space-y-0.5 ml-8">
                   {nav.subItems.map((subItem) => (
                     <li key={subItem.name}>
                       <Link
@@ -220,12 +220,12 @@ const AppSidebar: React.FC = () => {
 
   return (
     <aside
-      className={`fixed mt-16 flex flex-col lg:mt-0 top-0 px-3 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-300 ease-in-out z-50 border-r border-gray-200
+      className={`fixed mt-[72px] flex flex-col lg:mt-0 top-0 px-4 left-0 bg-white dark:bg-gray-900 dark:border-gray-800 text-gray-900 h-screen transition-all duration-200 ease-out z-50 border-r border-gray-200
         ${
           isExpanded || isMobileOpen
-            ? "w-[240px]"
+            ? "w-[260px]"
             : isHovered
-            ? "w-[240px]"
+            ? "w-[260px]"
             : "w-[72px]"
         }
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}
@@ -233,7 +233,7 @@ const AppSidebar: React.FC = () => {
       onMouseEnter={() => !isExpanded && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="py-5 flex justify-center">
+      <div className="pt-6 pb-0 flex justify-center">
         <Link to="/">
           {isExpanded || isHovered || isMobileOpen ? (
             <>
@@ -241,15 +241,15 @@ const AppSidebar: React.FC = () => {
                 className="dark:hidden"
                 src="/images/logo/logo.svg"
                 alt="Zaplio"
-                width={120}
-                height={32}
+                width={130}
+                height={34}
               />
               <img
                 className="hidden dark:block"
                 src="/images/logo/logo-dark.svg"
                 alt="Zaplio"
-                width={120}
-                height={32}
+                width={130}
+                height={34}
               />
             </>
           ) : (
@@ -262,13 +262,13 @@ const AppSidebar: React.FC = () => {
           )}
         </Link>
       </div>
-      <div className="flex flex-col overflow-y-auto duration-300 ease-linear no-scrollbar">
-        <nav className="mb-4">
-          <div className="flex flex-col gap-2">
+      <div className="flex flex-col overflow-y-auto duration-200 ease-linear no-scrollbar">
+        <nav className="mb-6">
+          <div className="flex flex-col gap-6">
             {menuGroups.map((group, groupIndex) => (
               <div key={group.label}>
                 <h2
-                  className={`mb-2 text-[11px] uppercase tracking-wider flex leading-[18px] text-gray-400 ${
+                  className={`mb-2 text-[11px] font-semibold uppercase tracking-wider flex leading-[18px] text-gray-400 ${
                     !isExpanded && !isHovered
                       ? "lg:justify-center"
                       : "justify-start"
