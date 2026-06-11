@@ -153,7 +153,7 @@ const AppSidebar: React.FC = () => {
                 )}
                 {(isExpanded || isHovered || isMobileOpen) && (
                   <ChevronDownIcon
-                    className={`ml-auto w-5 h-5 transition-transform duration-200 ${
+                    className={`ml-auto w-4 h-4 transition-transform duration-200 ${
                       isOpen ? "rotate-180 text-brand-500" : ""
                     }`}
                   />
@@ -264,14 +264,14 @@ const AppSidebar: React.FC = () => {
       </div>
       <div className="flex flex-col overflow-y-auto duration-200 ease-linear no-scrollbar">
         <nav className="mb-6">
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4">
             {menuGroups.map((group, groupIndex) => (
               <div key={group.label}>
                 <h2
-                  className={`mb-2 text-[11px] font-semibold uppercase tracking-wider flex leading-[18px] text-gray-400 ${
+                  className={`mb-1.5 text-[11px] font-semibold uppercase tracking-wider flex leading-[18px] text-gray-400 ${
                     !isExpanded && !isHovered
                       ? "lg:justify-center"
-                      : "justify-start"
+                      : "justify-start px-1"
                   }`}
                 >
                   {isExpanded || isHovered || isMobileOpen ? (
