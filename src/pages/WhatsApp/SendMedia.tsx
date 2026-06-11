@@ -4,7 +4,7 @@ import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 export default function SendMedia() {
   return (
     <>
-      <PageMeta title="Send Media Message | Zaplio" />
+      <PageMeta title="Send Media Message | Zaplio" description="Send media messages via WhatsApp" />
       <PageBreadcrumb pageTitle="Media Message" />
       <div className="grid grid-cols-1 gap-6">
         <div className="p-6 bg-white rounded-2xl dark:bg-gray-900 dark:border-gray-800 border border-gray-200">
