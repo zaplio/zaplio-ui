@@ -48,7 +48,13 @@ const menuGroups: MenuGroup[] = [
   {
     label: "Messaging",
     items: [
-      { icon: <MailIcon />, name: "Quick Send", path: "/wa/send-message" },
+      {
+        icon: <MailIcon />, name: "Quick Send",
+        subItems: [
+          { name: "Text Message", path: "/wa/send-message" },
+          { name: "Media Message", path: "/wa/send-media" },
+        ],
+      },
       { icon: <DocsIcon />, name: "Templates", path: "/templates" },
       { icon: <PaperPlaneIcon />, name: "Campaigns", path: "/campaigns" },
       { icon: <CalenderIcon />, name: "Scheduled", path: "/scheduled" },

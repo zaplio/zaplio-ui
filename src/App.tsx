@@ -8,6 +8,7 @@ import Home from "./pages/Dashboard/Home";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import QrConnect from "./pages/WhatsApp/QrConnect";
 import SendMessage from "./pages/WhatsApp/SendMessage";
+import SendMedia from "./pages/WhatsApp/SendMedia";
 import Contacts from "./pages/WhatsApp/Contacts";
 import Groups from "./pages/WhatsApp/Groups";
 import Accounts from "./pages/WhatsApp/Accounts";
@@ -49,6 +50,7 @@ export default function App() {
               <Route path="/campaigns" element={<Campaigns />} />
               <Route path="/scheduled" element={<Scheduled />} />
               <Route path="/wa/send-message" element={<SendMessage />} />
+              <Route path="/wa/send-media" element={<SendMedia />} />
             </Route>
           </Route>
 
