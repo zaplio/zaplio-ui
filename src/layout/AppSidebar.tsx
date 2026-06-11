@@ -48,10 +48,10 @@ const menuGroups: MenuGroup[] = [
   {
     label: "Messaging",
     items: [
+      { icon: <MailIcon />, name: "Quick Send", path: "/wa/send-message" },
       { icon: <DocsIcon />, name: "Templates", path: "/templates" },
       { icon: <PaperPlaneIcon />, name: "Campaigns", path: "/campaigns" },
       { icon: <CalenderIcon />, name: "Scheduled", path: "/scheduled" },
-      { icon: <MailIcon />, name: "Quick Send", path: "/wa/send-message" },
     ],
   },
   {
