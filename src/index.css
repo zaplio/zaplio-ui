@@ -231,7 +231,7 @@ layer(base);
 }
 
 @utility menu-item {
-  @apply relative flex items-center w-full gap-2.5 px-3 py-1.5 font-medium rounded-xl text-[13px] min-h-[36px];
+  @apply relative flex items-center w-full gap-2.5 px-3 py-1 font-medium rounded-xl text-[13px] min-h-[34px];
 }
 
 @utility menu-item-active {
